@@ -57,14 +57,38 @@
 			isa = PBXGroup;
 			children = (
 				650FF0F9203E5D850032E296 /* AppDelegate.swift */,
-				650FF0FB203E5D850032E296 /* TodoListViewController.swift */,
+				65DC7C952040FCF20032EE04 /* Controller */,
+				65DC7C942040FCDE0032EE04 /* View */,
+				65DC7C932040FCB70032EE04 /* Model */,
+				650FF105203E5D850032E296 /* Info.plist */,
+			);
+			path = Todoey;
+			sourceTree = "<group>";
+		};
+		65DC7C932040FCB70032EE04 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				65DC7C902040F3B60032EE04 /* Item.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		65DC7C942040FCDE0032EE04 /* View */ = {
+			isa = PBXGroup;
+			children = (
 				650FF0FD203E5D850032E296 /* Main.storyboard */,
 				650FF100203E5D850032E296 /* Assets.xcassets */,
 				650FF102203E5D850032E296 /* LaunchScreen.storyboard */,
-				650FF105203E5D850032E296 /* Info.plist */,
-				65DC7C902040F3B60032EE04 /* Item.swift */,
 			);
-			path = Todoey;
+			path = View;
+			sourceTree = "<group>";
+		};
+		65DC7C952040FCF20032EE04 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				650FF0FB203E5D850032E296 /* TodoListViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
