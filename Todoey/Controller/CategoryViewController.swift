@@ -9,6 +9,8 @@
 import UIKit
 import RealmSwift
 import SwipeCellKit
+import ChameleonFramework
+
 
 class CategoryViewController: UITableViewController {
     
@@ -21,7 +23,19 @@ class CategoryViewController: UITableViewController {
         
         loadCategories()
         tableView.rowHeight = 80.0
-      
+        tableView.separatorStyle = .none
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller não existe")}
+        
+        let navBarColor = FlatWhite()
+        navBar.barTintColor = navBarColor
+        navBar.tintColor = ContrastColorOf(navBarColor, returnFlat: true)
+        
+        navBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor : ContrastColorOf(navBarColor, returnFlat: true)]
+        
     }
     
     //MARK: - TableView Data Source Methods
@@ -35,6 +49,8 @@ class CategoryViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! SwipeTableViewCell
         cell.textLabel?.text = categoryArray?[indexPath.row].name ?? "Sem Categorias"
         cell.delegate = self
+        
+        //cell.backgroundColor = UIColor.randomFlat
         
         return cell
     }

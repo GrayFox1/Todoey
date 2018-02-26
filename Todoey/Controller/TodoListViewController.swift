@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import SwipeCellKit
+import ChameleonFramework
 
 class TodoListViewController: UITableViewController{
     
@@ -24,7 +25,35 @@ class TodoListViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 80.0
+        tableView.separatorStyle = .none
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        title = selectedCategory?.name
+        let colorHex = FlatSkyBlue().hexValue()
+        
+        updateNavBar(withHexCode: colorHex)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        updateNavBar(withHexCode: "1D9BF6")
+    }
+    
+    func updateNavBar(withHexCode colorHexCode : String){
+        
+        guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller não existe")}
+        guard let navBarColor = UIColor(hexString : colorHexCode) else {fatalError()}
+        
+        navBar.barTintColor = navBarColor
+        navBar.tintColor = ContrastColorOf(navBarColor, returnFlat: true)
+        
+        navBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor : ContrastColorOf(navBarColor, returnFlat: true)]
+        
+    }
+    
+    
     
     //MARK - Table View Datasource Methods
     
@@ -39,6 +68,13 @@ class TodoListViewController: UITableViewController{
         
         cell.accessoryType = (itemArray?[indexPath.row].state)! ? .checkmark : .none
         cell.delegate = self
+        
+        if let color = FlatSkyBlue().darken(byPercentage: CGFloat(indexPath.row) / CGFloat(itemArray!.count)){
+            cell.backgroundColor = color
+            cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+        }
+        
+        
         return cell
     }
     
